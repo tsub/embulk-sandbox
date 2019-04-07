@@ -1,0 +1,5 @@
+#!/bin/bash
+
+cp .envrc{.skeleton,}
+direnv allow
+docker-compose build
