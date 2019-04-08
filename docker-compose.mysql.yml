@@ -1,0 +1,30 @@
+version: "3"
+services:
+  mysql-source:
+    image: mysql:5.6
+    environment:
+      MYSQL_ALLOW_EMPTY_PASSWORD: "yes"
+    volumes:
+      - mysql-source:/var/lib/mysql
+  mysql-dest:
+    image: mysql:5.6
+    environment:
+      MYSQL_ALLOW_EMPTY_PASSWORD: "yes"
+    volumes:
+      - mysql-dest:/var/lib/mysql
+  db-seed-for-source:
+    image: mysql:5.6
+    command: /db-seed.sh
+    depends_on:
+      - mysql-source
+    volumes:
+      - ./db-seed.sh:/db-seed.sh
+  db-seed-for-dest:
+    image: mysql:5.6
+    command: mysql -h mysql-dest -u root -e "create database embulk_test;"
+    depends_on:
+      - mysql-dest
+
+volumes:
+  mysql-source: {}
+  mysql-dest: {}

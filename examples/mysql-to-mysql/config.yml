@@ -1,0 +1,17 @@
+in:
+  type: mysql
+  host: mysql-source
+  port: 3306
+  user: root
+  password: ""
+  database: embulk_test
+  table: users
+out:
+  type: mysql
+  host: mysql-dest
+  port: 3306
+  user: root
+  password: ""
+  database: embulk_test
+  table: users
+  mode: insert_direct
