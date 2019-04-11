@@ -6,6 +6,12 @@ in:
   password: ""
   database: embulk_test
   table: users
+
+filters:
+  - type: hash
+    columns:
+      - {name: name, algorythm: SHA_256}
+
 out:
   type: mysql
   host: mysql-dest
